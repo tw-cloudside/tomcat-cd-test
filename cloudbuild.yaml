@@ -38,10 +38,3 @@
      - >-
        gcloud compute instance-groups managed rolling-action start-update tomcat-test-instance-group --version=template=instance-template-tomcat-$BUILD_ID --zone=asia-south1-a
    entrypoint: bash
-
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute images delete tomcat-image-$BUILD_ID -q 
-   entrypoint: bash 
