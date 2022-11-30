@@ -6,6 +6,7 @@
        gcloud version | grep SDK
    entrypoint: bash
  - name: 'Set up Cloud SDK'
+   uses: 'google-github-actions/setup-gcloud@v1'
    version: '410.0.0-0'
  - name: gcr.io/cloud-builders/gcloud
    args:
