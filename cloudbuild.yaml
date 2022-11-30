@@ -11,10 +11,16 @@
      - >-
        gcloud components update -q
    entrypoint: bash
+
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       apt-get update && apt-get install google-cloud-sdk=410.0.0-0
+   entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
      - >-
        gcloud version | grep SDK
    entrypoint: bash
-
