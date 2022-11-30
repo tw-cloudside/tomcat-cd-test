@@ -4,4 +4,5 @@
      - '-c'
      - >-
        gcloud version | grep SDK
+       apt-get update && apt-get install google-cloud-sdk=410.0.0-0
    entrypoint: bash
