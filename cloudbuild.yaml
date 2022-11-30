@@ -3,38 +3,5 @@
    args:
      - '-c'
      - >-
-       gcloud compute instances create tomcat-vm1-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --zone=asia-south1-a --metadata=startup-script='#! /bin/bash 
-       gsutil cp -r gs://tomcat-cd-test/* /opt/tomcat/webapps'
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - |
-       echo "Waiting for 1 minute for running startup script..."
-       sleep 60
-       echo "startup script run Completed"
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute images create tomcat-image-$BUILD_ID --source-disk=tomcat-vm1-$BUILD_ID --source-disk-zone=asia-south1-a --storage-location=asia-south1 --force
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute instances delete tomcat-vm1-$BUILD_ID --zone=asia-south1-a -q
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute instance-templates create instance-template-tomcat-$BUILD_ID --boot-disk-type=pd-balanced --machine-type=e2-medium --image=tomcat-image-$BUILD_ID --boot-disk-size=10
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute instance-groups managed rolling-action start-update tomcat-test-instance-group --version=template=instance-template-tomcat-$BUILD_ID --zone=asia-south1-a
+       gcloud version | grep SDK
    entrypoint: bash
