@@ -5,13 +5,6 @@
      - >-
        gcloud version | grep SDK
    entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud components update -q
-   entrypoint: bash
-
  - name: 'Set up Cloud SDK'
    version: '410.0.0-0'
  - name: gcr.io/cloud-builders/gcloud
