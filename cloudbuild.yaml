@@ -3,12 +3,37 @@
    args:
      - '-c'
      - >-
-       gcloud init &&
        gcloud version | grep SDK
    entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
      - >-
-       apt-get update && apt-get install google-cloud-sdk=410.0.0-0
+       curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-410.0.0-linux-x86_64.tar.gz
    entrypoint: bash
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       tar -xf google-cloud-cli-410.0.0-linux-x86.tar.gz
+   entrypoint: bash
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       ./google-cloud-sdk/install.sh
+   entrypoint: bash
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       ./google-cloud-sdk/bin/gcloud init
+   entrypoint: bash
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       gcloud version | grep SDK
+   entrypoint: bash
+
+
