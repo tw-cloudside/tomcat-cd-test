@@ -9,7 +9,7 @@
    args:
      - '-c'
      - >-
-       gcloud components update
+       gcloud components update -q
    entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
    args:
