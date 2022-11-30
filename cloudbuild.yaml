@@ -9,7 +9,7 @@
    args:
      - '-c'
      - >-
-       gcloud components update -q
+       gcloud components update --version 410.0.0-0 -q
    entrypoint: bash
 
  - name: gcr.io/cloud-builders/gcloud
