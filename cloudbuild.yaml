@@ -6,9 +6,11 @@
        gcloud version | grep SDK
    entrypoint: bash
  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
-   id: 'install'
-   entrypoint: gcloud
-   args: ['install']
+   entrypoint: 'gcloud'
+   args: ['compute', 'instances', 'create-with-container', 'my-vm-name','--container-image','asia-south1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
+   env:
+     - 'CLOUDSDK_COMPUTE_REGION=asia-south1'
+     - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
