@@ -1,39 +1,13 @@
  substitutions:
-   _IMAGE: tomcat-image
-   _MACHINE_TYPE: e2-medium
+   _PROJECT_ID: cloudside-academy
+   _ZONE: asia-south1-a
+   _CUSTOM_IMAGE: tomcat-image
+   _FILE: gs://bs-demo/SamplesW.war
  steps:
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
      - >-
-       gcloud version | grep SDK
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   id: create-instance-template
-   args:
-     - compute 
-     - instance-templates 
-     - create 
-     - instance-template-tomcat-$BUILD_ID 
-     - --machine-type=$_MACHINE_TYPE
-     - --network-interface=subnet=snpvt-finalyzer-mfa-saas-asso1-zn-a-test100,no-address 
-     - --service-account=finalyzer-compute-vm-test100@cloudside-academy.iam.gserviceaccount.com 
-     - --scopes=https://www.googleapis.com/auth/cloud-platform 
-     - --region=asia-south1 
-     - --tags=ntag-finvm-http,ntag-finvm-ssh  
-     - --boot-disk-type=pd-balanced
-     - --image-project=cloudside-academy
-     - --image=$_IMAGE
-     - --boot-disk-size=10
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud compute instance-groups managed rolling-action start-update vm-inst-grp-https-lb-finapp-test100 --version=template=instance-template-tomcat-$BUILD_ID --zone=asia-south1-a  
-   entrypoint: bash
- - name: gcr.io/cloud-builders/gcloud
-   args:
-     - '-c'
-     - >-
-       gcloud version | grep SDK
+       gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --zone=$_ZONE --metadata=startup-script='#! /bin/bash 
+       gsutil cp -r $(gsutil ls -l gs://bs-demo | sort -k 2 | tail -n 2 | head -1 | awk '{print $3}') /opt/tomcat/webapps'
    entrypoint: bash
