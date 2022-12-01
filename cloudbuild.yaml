@@ -13,14 +13,14 @@
      - instance-templates 
      - create 
      - instance-template-tomcat-$BUILD_ID 
-     - --machine-type="$_MACHINE_TYPE"
+     - --machine-type=$_MACHINE_TYPE
      - --network-interface=subnet=snpvt-finalyzer-mfa-saas-asso1-zn-a-test100,no-address 
      - --service-account=finalyzer-compute-vm-test100@cloudside-academy.iam.gserviceaccount.com 
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
      - --region=asia-south1 
      - --tags=ntag-finvm-http,ntag-finvm-ssh  
      - --boot-disk-type=pd-balanced
-     - --image="$_IMAGE"
+     - --image=$_IMAGE
      - --boot-disk-size=10
  - name: gcr.io/cloud-builders/gcloud
    args:
