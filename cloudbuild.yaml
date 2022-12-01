@@ -20,7 +20,7 @@
      - --region=asia-south1 
      - --tags=ntag-finvm-http,ntag-finvm-ssh  
      - --boot-disk-type=pd-balanced
-     - --image=$IMAGE
+     - --image="${IMAGE}"
      - --boot-disk-size=10
  - name: gcr.io/cloud-builders/gcloud
    args:
