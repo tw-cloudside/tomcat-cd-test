@@ -7,8 +7,8 @@
    entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
    env: 
-     - "IMAGE=tomcat-image"
-     - "MACHINE_TYPE=e2-medium"
+     - IMAGE="tomcat-image"
+     - MACHINE_TYPE="e2-medium"
    id: create-instance-template
    args:
      - compute 
