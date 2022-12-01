@@ -5,11 +5,10 @@
      - >-
        gcloud version | grep SDK
    entrypoint: bash
- - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
+ - name: gcr.io/cloud-builders/gcloud
    env:
      - '_MACHINE_TYPE=e2-medium'
    id: create-instance-template
-   entrypoint: gcloud
    args:
      - compute 
      - instance-templates 
