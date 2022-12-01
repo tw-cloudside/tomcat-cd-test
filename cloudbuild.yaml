@@ -1,4 +1,6 @@
  steps:
+ substitutions:
+   _IMAGE: tomcat-image
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
@@ -6,9 +8,6 @@
        gcloud version | grep SDK
    entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
-   env: 
-     - 'IMAGE=tomcat-image'
-     - MACHINE_TYPE="e2-medium"
    id: create-instance-template
    args:
      - compute 
@@ -22,7 +21,7 @@
      - --region=asia-south1 
      - --tags=ntag-finvm-http,ntag-finvm-ssh  
      - --boot-disk-type=pd-balanced
-     - --image=$IMAGE
+     - --image='${IMAGE}'
      - --boot-disk-size=10
  - name: gcr.io/cloud-builders/gcloud
    args:
