@@ -4,7 +4,7 @@
    _CUSTOM_IMAGE: tomcat-image
    _FILE: gs://bs-demo/SamplesW.war
  steps:
- - name: gcr.io/cloud-builders/gcloud
+ - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
    args:
      - '-c'
      - >-
