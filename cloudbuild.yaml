@@ -6,11 +6,29 @@
        gcloud version | grep SDK
    entrypoint: bash
  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
-   entrypoint: 'gcloud'
-   args: ['compute', 'instances', 'create-with-container', 'my-vm-name','--container-image','asia-south1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
-   env:
-     - 'CLOUDSDK_COMPUTE_REGION=asia-south1'
-     - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
+   id: create-instance-template
+   args:
+     - compute 
+     - instance-templates 
+     - create 
+     - instance-template-tomcat-$BUILD_ID 
+     - --machine-type=e2-medium 
+     - --network-interface=subnet=snpvt-finalyzer-mfa-saas-asso1-zn-a-test100
+     - --no-address  
+     - --service-account=finalyzer-compute-vm-test100@cloudside-academy.iam.gserviceaccount.com 
+     - --scopes=https://www.googleapis.com/auth/cloud-platform 
+     - --region=asia-south1 
+     - --tags=ntag-finvm-http,ntag-finvm-ssh  
+     - --boot-disk-type=pd-balanced 
+     - --machine-type=e2-medium 
+     - --image=tomcat-image
+     - --boot-disk-size=10
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
+       gcloud compute instance-groups managed rolling-action start-update vm-inst-grp-https-lb-finapp-test100 --version=template=instance-template-tomcat-$BUILD_ID --zone=asia-south1-a  
+   entrypoint: bash
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
