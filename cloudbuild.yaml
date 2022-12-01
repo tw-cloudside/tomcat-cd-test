@@ -22,7 +22,7 @@
      - --tags=ntag-finvm-http,ntag-finvm-ssh  
      - --boot-disk-type=pd-balanced
      - --image-project=cloudside-academy
-     - --image=${IMAGE}
+     - --image=$_IMAGE
      - --boot-disk-size=10
  - name: gcr.io/cloud-builders/gcloud
    args:
