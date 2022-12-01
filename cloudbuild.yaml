@@ -6,6 +6,8 @@
        gcloud version | grep SDK
    entrypoint: bash
  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
+   id: 'install'
+   args: ['install']
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
