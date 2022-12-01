@@ -10,6 +10,6 @@
      - '-c'
      - >-
        file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') &&
-       gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --zone=$_ZONE --metadata=startup-script='#! /bin/bash 
+       gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --subnet=$_SUBNET --zone=$_ZONE --metadata=startup-script='#! /bin/bash 
        gsutil cp -r $file /opt/tomcat/webapps'
    entrypoint: bash
