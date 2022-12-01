@@ -21,8 +21,7 @@
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
      - --region=asia-south1 
      - --tags=ntag-finvm-http,ntag-finvm-ssh  
-     - --boot-disk-type=pd-balanced 
-     - --machine-type=e2-medium 
+     - --boot-disk-type=pd-balanced
      - --image=tomcat-image
      - --boot-disk-size=10
  - name: gcr.io/cloud-builders/gcloud
