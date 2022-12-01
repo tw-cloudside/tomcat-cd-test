@@ -7,6 +7,7 @@
    entrypoint: bash
  - name: gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:0b5e8d676210c484217afa10f69e30b9d7250f52bbc09ae164fea1766a377cb3
    id: create-instance-template
+   entrypoint: gcloud
    args:
      - compute 
      - instance-templates 
