@@ -23,7 +23,7 @@
      - --machine-type=e2-medium 
      - --image=tomcat-image
      - --boot-disk-size=10
- - name: gcr.io/google.com/cloudsdktool/cloud-sdk:410.0.0
+ - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
      - >-
