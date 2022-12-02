@@ -9,6 +9,12 @@
    args:
      - '-c'
      - >-
+       file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file
+   entrypoint: bash
+ - name: gcr.io/cloud-builders/gcloud
+   args:
+     - '-c'
+     - >-
        file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file &&
        gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --subnet=$_SUBNET --zone=$_ZONE --metadata=startup-script='#! /bin/bash 
        gcloud storage cp -r $file /opt/tomcat/webapps'
