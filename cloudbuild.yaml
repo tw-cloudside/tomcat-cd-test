@@ -9,13 +9,13 @@
    args:
      - '-c'
      - >-
-       file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file &&
        gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --subnet=$_SUBNET --zone=$_ZONE
    entrypoint: bash
 
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
-     - >-
-       gcloud compute ssh --zone asia-south1-a tomcat-vm-f28fc7c6-1250-4e75-b026-f4bc0bbb55eb -- sudo gcloud storage cp -r $file /opt/tomcat/webapps
+     - >-       
+       file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file &&
+       gcloud compute ssh --zone=$_ZONE tomcat-vm-$BUILD_ID -- sudo gcloud storage cp -r $file /opt/tomcat/webapps
    entrypoint: bash
