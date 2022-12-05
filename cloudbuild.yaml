@@ -1,15 +1,7 @@
- substitutions:
-   _PROJECT_ID: cloudside-academy
-   _ZONE: asia-south1-a
-   _CUSTOM_IMAGE: tomcat-image
-   _FILE: gs://bs-demo/SamplesW.war
-   _SUBNET: tinkal-subnet
  steps:
  - name: gcr.io/cloud-builders/gcloud
    args:
      - '-c'
      - >-
-       gcloud compute instances create tomcat-vm-$BUILD_ID --image=$_CUSTOM_IMAGE --machine-type=e2-medium --project=$_PROJECT_ID --subnet=$_SUBNET --zone=$_ZONE &&
-       file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file &&
-       gcloud compute ssh --zone=$_ZONE tomcat-vm-$BUILD_ID -q -- sudo gcloud storage cp -r $file /opt/tomcat/webapps
+       file=$(gsutil ls -l gs://bs-demo  | sort -k 2 | tail -n 2 | head -1 | grep -i .war | awk '{print $3}') && echo $file 
    entrypoint: bash
